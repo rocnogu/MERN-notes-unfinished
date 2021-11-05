@@ -1,10 +1,9 @@
-import Router from 'express';
-import Note from "../models/noteModel";
+import express from 'express';
+import Note from "../models/noteModel.js";
 
-const noteRouter = Router();
+const noteRouter = express.Router();
 
-noteRouter.route("/create")
-.post((req,res) => {
+noteRouter.post('/', (req,res) => {
     const title = req.body.title;
     const content = req.body.content;
     const newNote = new Note({

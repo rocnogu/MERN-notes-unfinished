@@ -33,7 +33,7 @@ title: input.title,
 content: input.content
 
  }
-  axios.post('http://localhost:6969/create', newNote) 
+  axios.post('http://localhost:4321/create', newNote) 
    }
   ///////////
   return (

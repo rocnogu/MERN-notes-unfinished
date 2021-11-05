@@ -1,21 +1,24 @@
 import express from 'express';
 const app = express();
 //
-import noteRouter from './routes/noteRouter';
+import noteRouter from './routes/noteRouter.js';
 //
 import cors from 'cors';
 import dotenv from 'dotenv';
-import mongoose from 'mongoose';
 dotenv.config();
+import mongoose from 'mongoose';
 //
 app.use(cors());
 app.use(express.json());
 //
-mongoose.connect(process.env.MONGODB)
+const PORT = process.env.PORT || 1234
+const CONNECTION_URL = process.env.MONGODB
 //
-app.use('/create', noteRouter)
+app.use('/notes', noteRouter)
+
+
 //
-app.listen(6969, () => {
-    console.log('Server is running on port 6969')
-})
+mongoose.connect(CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true })
+.then(() => app.listen(PORT, () => console.log(`Server is running on port ${PORT}`)))
+.catch((err)=> console.log(err.message));
 
